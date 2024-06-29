@@ -1,0 +1,24 @@
+altgraph @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/altgraph-0.17.2-py2.py3-none-any.whl
+certifi==2024.6.2
+cffi==1.16.0
+charset-normalizer==3.3.2
+cryptography==42.0.8
+future @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/future-0.18.2-py3-none-any.whl
+idna==3.7
+macholib @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/macholib-1.15.2-py2.py3-none-any.whl
+numpy==2.0.0
+pillow==10.3.0
+pycparser==2.22
+pynput==1.7.7
+pyobjc-core==10.3.1
+pyobjc-framework-ApplicationServices==10.3.1
+pyobjc-framework-Cocoa==10.3.1
+pyobjc-framework-CoreText==10.3.1
+pyobjc-framework-Quartz==10.3.1
+pyperclip==1.9.0
+python-dotenv==1.0.1
+requests==2.32.3
+scipy==1.13.1
+six @ file:///AppleInternal/Library/BuildRoots/860631e9-c1c5-11ee-98ee-b6ef2fd8d87b/Library/Caches/com.apple.xbs/Sources/python3/six-1.15.0-py2.py3-none-any.whl
+sounddevice==0.4.7
+urllib3==2.2.2
